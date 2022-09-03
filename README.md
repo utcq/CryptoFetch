@@ -7,10 +7,10 @@ Crypto Ascii Art:
       - DOGE
  (i'm too lazy to create more)
 
-#Why Curl
+# Why Curl
 Using curl because requests was too slow and unresponsive
 
-#Installation
+# Installation
 ```bash
 cd ~
 git clone https://github.com/UnityTheCoder/CryptoFetch.git
@@ -18,6 +18,9 @@ cd CryptoFetch
 sudo sudo ln -s ~/CryptoFetch/cryptofetch.py /usr/bin/cryptofetch
 chmod +x /usr/bin/cryptofetch
 ```
+
+
+
 
 
 ![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/btcfetch.png)
