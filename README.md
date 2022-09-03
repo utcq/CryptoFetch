@@ -1,10 +1,17 @@
 # CryptoFetch
 Crypto Ascii Art:
+
       - BTC
+      
       - ETH
+      
       - XMR
+      
       - LTC
+      
       - DOGE
+      
+      
  (i'm too lazy to create more)
 
 # Why Curl
