@@ -22,7 +22,15 @@ chmod +x /usr/bin/cryptofetch
 
 `cryptofetch CRYPTOSYMBOL`
 
+
+
+
+
+
+
+
 **example**
+
 `cryptofetch btcusd`
 
 
