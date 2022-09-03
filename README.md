@@ -20,4 +20,8 @@ chmod +x /usr/bin/cryptofetch
 ```
 
 
-![Alt text](https://github.com/UnityTheCoder/BookTUI/blob/main/images/screen6.png?raw=true)
+![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/btcfetch.png)
+![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/ethfetch.png)
+![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/ltcfetch.png)
+![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/dogefetch.png)
+![Alt text](https://raw.githubusercontent.com/UnityTheCoder/CryptoFetch/main/assets/xrpfetch.png)
