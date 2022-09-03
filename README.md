@@ -1,44 +1,29 @@
 # CryptoFetch
 Crypto Ascii Art:
-
-      - BTC
-      
-      - ETH
-      
-      - XMR
-      
-      - LTC
-      
-      - DOGE
-      
-      
- (i'm too lazy to create more)
-
-# Why Curl
-Using curl because requests was too slow and unresponsive
+Most popular cryptos
 
 # Installation
+
+
+install librarys in requirments.txt
+
 ```bash
 cd ~
 git clone https://github.com/UnityTheCoder/CryptoFetch.git
 cd CryptoFetch
-sudo sudo ln -s ~/CryptoFetch/cryptofetch.py /usr/bin/cryptofetch
+sudo sudo ln -s ~/CryptoFetch/ /usr/bin/cryptofetch
 chmod +x /usr/bin/cryptofetch
 ```
 # Usage
 
 `cryptofetch CRYPTOSYMBOL`
 
-
-
-
-
-
+Please get coin id from coingecko.com
 
 
 **example**
 
-`cryptofetch btcusd`
+`cryptofetch bitcoin`
 
 
 
