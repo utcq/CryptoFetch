@@ -12,7 +12,7 @@ cd ~
 git clone https://github.com/UnityTheCoder/CryptoFetch.git
 cd CryptoFetch
 python3 -m pip install -r requirements.txt
-sudo sudo ln -s ~/CryptoFetch/cryptofetch.py /usr/bin/cryptofetch
+sudo sudo ln -s ~/CryptoFetch/ /usr/bin/cryptofetch
 chmod +x /usr/bin/cryptofetch
 ```
 # Usage
