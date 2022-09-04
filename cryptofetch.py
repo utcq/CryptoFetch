@@ -1,167 +1,65 @@
 #!/usr/bin/python3
 import json
-#import requests
+import ascii
+import requests as r
 import sys, os 
+from os import listdir
+from os.path import isfile, join
+from thefuzz import fuzz, process
 
-
-baseURL = "https://api.binance.us/api/v3/trades?symbol="                          
-baseURL1 = "https://api.binance.us/api/v3/ticker?symbol="
-
+coin = ''
+currency = 'usd'
 
 class Art:
-    def btc(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-  ▄▄█▀▀▀▀▀█▄▄         ⚛  Symbol:                   {symbol}
-▄█▀──▄─▄────▀█▄       $  Price:                    {price}
-█───▀█▀▀▀▀▄───█       ♦  ID:                       {id}
-█────█▄▄▄▄▀───█       ⚡ Qty:                      {qty}
-█────█────█───█       ♟  QuoteQty:                 {quoteQty}
-▀█▄─▀▀█▀█▀──▄█▀       %  PriceChangePercent:       {priceChangePercent}
-  ▀▀█▄▄▄▄▄█▀▀         ⬛ Volume:                   {volume}
+    def coinOutput(image, symbol, price,  coin24HourChange, coin24HourVolume, coinMarketCap):
+        art = f"""⚛  Symbol:                   {symbol.upper()}
+$  Price:                    {price}
+%  PriceChangePercent:       {"{:.2f}".format(coin24HourChange)}
+⬛ Volume:                   {"{:.2f}".format(coin24HourVolume)}
+M  Market Cap:               {"{:.2f}".format(coinMarketCap)}  
         """
-        
+        print(image)
         print(art)
         
-    def eth(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-       =.            ⚛  Symbol:                   {symbol}
-     .=*#:           $  Price:                    {price}
-    :==*##=          ♦  ID:                       {id}
-   :===*###+         ⚡ Qty:                      {qty}
-  -===+#%%##*        ♟  QuoteQty:                 {quoteQty}
- =+*###%@@%%%#.      %  PriceChangePercent:       {priceChangePercent}
-:+#####%@@@@%*-      ⬛ Volume:                   {volume}
- :.:=*#%@#+::=.
-  -=-..-:-+#+  
-   .===+###-   
-     -=*#*.    
-      :+-      
-
-        """
-        print(art)
-
-    def xmr(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-   :=+***+=:         ⚛  Symbol:                   {symbol}
- -+*********+-       $  Price:                    {price}
--*=.=*****=.=*-      ♦  ID:                       {id}
-**=  .=*=.  =**      ⚡ Qty:                      {qty}
-+*- +=. .=+ -*+      ♟  QuoteQty:                 {quoteQty}
- .::+#*+*#+::.       %  PriceChangePercent:       {priceChangePercent}
-  -*#######*-        ⬛ Volume:                   {volume}
-
-        """
-
-        print(art)
-
-
-    def doge(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-   -=+##*+=-         ⚛  Symbol:                   {symbol}
- -#*++++++*#*-       $  Price:                    {price}
-=**:+=++==++**=      ♦  ID:                       {id}
-#*-=*:::. .=**#      ⚡ Qty:                      {qty}
-*#=-=-::..-.=**      ♟  QuoteQty:                 {quoteQty}
-.*=-===-..-.=*.      %  PriceChangePercent:       {priceChangePercent}
-  -=---::::=-        ⬛ Volume:                   {volume}
-
-        """
-
-        print(art)
-
-    def ltc(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-   ..:::::..         ⚛  Symbol:                   {symbol}
- .:::::.:::::.       $  Price:                    {price}
-.:::::  .:::::.      ♦  ID:                       {id}
-:::::   .::::::      ⚡ Qty:                      {qty}
-::::.  ...:::::      ♟  QuoteQty:                 {quoteQty}
- :::.......:::       %  PriceChangePercent:       {priceChangePercent}
-  .:::::::::.        ⬛ Volume:                   {volume}
-
-        """
-
-        print(art)
-
-    def other(symbol, price, id, qty, quoteQty, priceChangePercent, volume, count):
-        art = f"""
-      ██████████        ⚛  Symbol:                   {symbol}
-    ██          ██      $  Price:                    {price}
-  ██    ░░██░░░░░░██    ♦  ID:                       {id}
-██    ░░██████░░░░░░██  ⚡ Qty:                      {qty}
-██  ░░░░██░░░░░░░░░░██  ♟  QuoteQty:                 {quoteQty}
-██  ░░░░░░██░░░░░░░░██  %  PriceChangePercent:       {priceChangePercent}
-██  ░░░░░░░░██░░░░░░██  ⬛ Volume:                   {volume}
-██  ░░░░██████░░░░░░██
-  ██  ░░░░██░░░░░░██  
-    ██░░░░░░░░░░██    
-      ██████████      
-
-        """
-
-        print(art)
-
-
-
-
-def getJson(url: str):
-    rec = os.popen(f'curl --silent -X "GET" "{url}"').read()
-    return json.loads(rec)
-    
-
-
-
+  
 def retrieveData(crypto: str):
-    #session = requests.Session()
-    crypto = crypto.upper()
-    cURL = baseURL + crypto
-    cURL1 = baseURL1 + crypto
-    #data = session.get(cURL, headers=headers)
-    #data = data.json()
-    data = getJson(cURL)
-    try:
-        if data["msg"] == "Invalid symbol.":
-            print("Invalid Symbol")
-            return False;
-    except:
-        pass
-    data = data[0]
-    price = data["price"]
-    id = data["id"]
-    qty = data["qty"]
-    quoteQty = data["quoteQty"]
+    
+    request = r.get('https://api.coingecko.com/api/v3/simple/price?ids=' + coin + '&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+    
+    coinData = request.json()
+    coinPrice = coinData[coin][currency]
+    coinMarketCap = coinData[coin][currency + '_market_cap']
+    coin24HourVolume = coinData[coin][currency + '_24h_vol']
+    coin24HourChange =  coinData[coin][currency + '_24h_change']
 
-    #data = session.get(cURL1, headers=headers)
-    #data = data.json()
-
-    data = getJson(cURL1)
-
-    priceChangePercent = data["priceChangePercent"]
-    volume = data["volume"]
-    count = data["count"]
-
-    if str(crypto.upper()).startswith("BTC"):
-        Art.btc(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
-    elif str(crypto.upper()).startswith("ETH"):
-        Art.eth(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
-    elif str(crypto.upper()).startswith("XMR"):
-        Art.xmr(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
-    elif str(crypto.upper()).startswith("DOGE"):
-        Art.doge(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
-    elif str(crypto.upper()).startswith("LTC"):
-        Art.ltc(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
-    else:
-        Art.other(crypto, price, id, qty, quoteQty, priceChangePercent, volume, count)
+    image = collectImage(coin)
+    Art.coinOutput(image, coin, coinPrice, coin24HourChange, coin24HourVolume, coinMarketCap)
 
 
+def collectImage(coin):
+  request = r.get("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false")
+  
+  symbolData = request.json()
+  symbolString = symbolData['symbol']
+  onlyFiles = [f for f in listdir(os.getcwd() + '/icon') if isfile(join(os.getcwd() + '/icon', f))]
+  imageName = process.extractOne(symbolString + '.png', onlyFiles)
+  
+  image = ascii.ImageToAscii(imagePath=os.getcwd() + '/icon/' + imageName[0])
+  
+  seperator  = "<"
 
+  image = str(image).split(seperator, 1)[0]
 
-
-   
+  return image
+  
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Missing Argument.\nUsage: cryptofetch CRYPTOSYMBOL")
         exit()
+
+    coin = sys.argv[1]
     retrieveData(sys.argv[1])
+
+
