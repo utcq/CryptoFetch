@@ -11,7 +11,8 @@ install librarys in requirments.txt
 cd ~
 git clone https://github.com/UnityTheCoder/CryptoFetch.git
 cd CryptoFetch
-sudo sudo ln -s ~/CryptoFetch/ /usr/bin/cryptofetch
+python3 -m pip install -r requirements.txt
+sudo sudo ln -s ~/CryptoFetch/cryptofetch.py /usr/bin/cryptofetch
 chmod +x /usr/bin/cryptofetch
 ```
 # Usage
